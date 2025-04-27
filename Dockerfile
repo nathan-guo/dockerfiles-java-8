@@ -6,10 +6,14 @@ RUN apt-get update && \
     apt-get install -y \
     fonts-noto-cjk \
     fontconfig \
+    && apt-get install -y --no-install-recommends tzdata \
     && rm -rf /var/lib/apt/lists/*
 
 # 刷新字体缓存
 RUN fc-cache -fv
+
+# 设置时区（Asia/Shanghai）
+ENV TZ=Asia/Shanghai
 
 # 默认命令，查看 Java 版本
 CMD ["java", "-version"]
