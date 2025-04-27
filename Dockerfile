@@ -14,6 +14,9 @@ RUN fc-cache -fv
 
 # 设置时区（Asia/Shanghai）
 ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
+    && echo $TZ > /etc/timezone \
+    && dpkg-reconfigure -f noninteractive tzdata
 
 # 默认命令，查看 Java 版本
 CMD ["java", "-version"]
